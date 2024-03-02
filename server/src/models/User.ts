@@ -23,7 +23,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
       type: Number,
     },
     socialMedia: {
-      type: [String],
+      type: [Object],
     },
     role: {
       type: String,
