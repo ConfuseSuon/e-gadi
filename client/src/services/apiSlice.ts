@@ -37,15 +37,16 @@ export const baseQueryWithReauth: BaseQueryFn<
   return result;
 };
 
-export const authAPISlice = createApi({
-  reducerPath: "authAPI",
+export const apiSlice = createApi({
+  reducerPath: "api",
+  tagTypes: ["NewCars"],
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({}),
 });
 
-export const newCarAPISlice = createApi({
-  reducerPath: "newCarAPI",
-  baseQuery: baseQueryWithReauth,
-  tagTypes: ["NewCars"],
-  endpoints: (builder) => ({}),
-});
+// export const newCarAPISlice = createApi({
+//   reducerPath: "newCarAPI",
+//   baseQuery: baseQueryWithReauth,
+//   tagTypes: ["NewCars"],
+//   endpoints: (builder) => ({}),
+// });

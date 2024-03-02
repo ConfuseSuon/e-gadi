@@ -8,11 +8,8 @@ import NewElectricCarForm from "./NewElectricCarForm";
 const EditNewElectricCar = () => {
   const dispatch = useAppDispatch();
   const location = useLocation();
-  const [form] = Form.useForm();
 
   const { initialValues } = location.state;
-
-  console.log(initialValues, "init");
 
   useEffect(() => {
     dispatch(

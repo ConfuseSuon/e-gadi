@@ -59,7 +59,6 @@ const CsImageUpload = ({ imageUrl, imageUrlChange, isImageUploading }: any) => {
     var formData = new FormData();
     formData.append("file", selectedImage);
     const fileName = selectedImage.name;
-    console.log("Final:", fileName);
 
     try {
       const url = `${import.meta.env.VITE_BASE_URL}/upload/image`;

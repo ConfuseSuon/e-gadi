@@ -1,5 +1,5 @@
-import { apiSlice } from "../features/apiSlice";
 import { showMessage } from "../utils/help";
+import { apiSlice } from "./apiSlice";
 
 export const authAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

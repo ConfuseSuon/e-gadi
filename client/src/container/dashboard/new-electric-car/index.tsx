@@ -100,7 +100,6 @@ const NewElectricCar: React.FC = () => {
                   marginRight: ".2rem",
                 }}
                 onClick={() => {
-                  console.log("hello clicked");
                   navigate("/dashboard/new-electric-car/edit", {
                     state: { initialValues: record },
                   });
@@ -131,7 +130,6 @@ const NewElectricCar: React.FC = () => {
   const handleSubmitDeleteConfirmation = async () => {
     setVisibility(false);
     try {
-      console.log(selectedPopup, "hello");
       await deleteNewCar(selectedPopup);
     } catch (error) {
       console.log(error);
@@ -154,7 +152,7 @@ const NewElectricCar: React.FC = () => {
         visible={visibleDeleteConfirmation}
         handleDelete={handleSubmitDeleteConfirmation}
         handleCancel={handleCancelDeleteConfirmation}
-        confirmMessage="Are you sure you want to delete the selected Popup?"
+        confirmMessage="Are you sure you want to delete the selected new car?"
       />
     </Spin>
   );
