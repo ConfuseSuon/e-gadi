@@ -14,8 +14,9 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
   const [imageUrl, setImageUrl] = useState(initialValues?.imageURL ?? "");
   const [loading, setLoading] = useState<boolean>(false);
 
-  const [postNewCar] = usePostNewCarMutation();
-  const [updateNewCar] = useUpdateNewCarMutation();
+  const [postNewCar, { isLoading: postLoading }] = usePostNewCarMutation();
+  const [updateNewCar, { isLoading: updateLoading }] =
+    useUpdateNewCarMutation();
 
   function imageUrlChange(url: any) {
     setImageUrl(url);
@@ -26,6 +27,7 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
     if (!!initialValues) {
       try {
         updateNewCar({ formData: form, id: initialValues?._id });
+        return navigate(-1);
       } catch (error) {
         console.log(error);
       }
@@ -171,14 +173,15 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
             />
           </Form.Item>
           <Form.Item style={{ margin: "2rem 0 0 0" }}>
-            <Flex align="center">
+            <Flex align="center" gap={8}>
               <Button
                 type="primary"
                 htmlType="submit"
-                style={{ marginRight: ".4rem" }}
+                loading={postLoading || updateLoading}
               >
                 {!!initialValues ? "Update" : "Add"}
               </Button>
+
               <Button type="default" onClick={() => navigate(-1)}>
                 Cancel
               </Button>
