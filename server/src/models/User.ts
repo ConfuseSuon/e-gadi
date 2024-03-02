@@ -25,6 +25,10 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     socialMedia: {
       type: [String],
     },
+    role: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );

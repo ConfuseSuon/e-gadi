@@ -10,7 +10,6 @@ export const registerUser = async (
   res: Response
 ): Promise<Response> => {
   try {
-    console.log("first");
     const { full_name, email, password, address, contact_number, socialMedia } =
       req.body as Pick<
         IUser,
@@ -21,7 +20,6 @@ export const registerUser = async (
         | "address"
         | "socialMedia"
       >;
-    console.log("2");
 
     // Checking User
     const user = await User.findOne({ email });
@@ -31,20 +29,25 @@ export const registerUser = async (
     const saltRounds = 10;
     const hashedPassword = await encryptPassword(password, saltRounds);
 
+    // admin email
+    const matchedAdminEmail = process.env.ADMIN_EMAIL?.includes(email);
+
     // Save User Into Database
-    const userData = new User({
+    const userData: IUser = new User({
       full_name,
       email,
       password: hashedPassword,
       address,
       contact_number,
       socialMedia,
+      role: matchedAdminEmail ? "admin" : "user",
     });
+
     const savedUserData = await userData.save();
 
     const token = await generateJwtToken(
       { id: savedUserData._id, full_name: savedUserData.full_name },
-      "2h"
+      "5m"
     );
 
     return res

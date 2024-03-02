@@ -7,6 +7,7 @@ export interface IUser extends Document {
   address?: string;
   contact_number?: number;
   socialMedia?: string[];
+  role: string;
 }
 
 export interface INewCar extends Document {
