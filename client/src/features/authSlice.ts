@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { authAPI } from "../services/authAPI";
+import { userAPI } from "../services/user";
 import { userDataAPI } from "../services/userDataAPI";
 import { obtainNavigatePath, obtainToken } from "../utils/help";
 
@@ -58,6 +59,18 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addMatcher(
       authAPI.endpoints.login.matchFulfilled,
+      (state, { payload }) => {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("loggedInUser");
+        localStorage.setItem("accessToken", payload?.accessToken);
+        localStorage.setItem("loggedInUser", JSON.stringify(payload?.data));
+        state.accessToken = payload?.accessToken;
+
+        state.showLoginModal = false;
+      }
+    );
+    builder.addMatcher(
+      userAPI.endpoints.registerUser.matchFulfilled,
       (state, { payload }) => {
         localStorage.removeItem("accessToken");
         localStorage.removeItem("loggedInUser");

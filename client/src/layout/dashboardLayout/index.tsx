@@ -27,7 +27,6 @@ const { Header, Content, Footer, Sider } = Layout;
 const DashboardLayout: React.FC = () => {
   useGetCurrentUserQuery();
   const { loggedInUser } = useAppSelector((state) => state.auth);
-  console.log("hello", "rerender happeen", loggedInUser);
 
   const {
     token: { colorBgContainer, borderRadiusLG },

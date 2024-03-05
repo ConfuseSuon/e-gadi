@@ -7,23 +7,20 @@ interface ICsModalProps {
   title: string;
   children: React.ReactNode;
   form: any;
+  setVisibleRegisterForm: any;
 }
 
-const CsModal: React.FC<ICsModalProps> = ({ title, children, form }) => {
-  const [loading, setLoading] = useState(false);
-
+const CsModal: React.FC<ICsModalProps> = ({
+  title,
+  children,
+  form,
+  setVisibleRegisterForm,
+}) => {
   const { showLoginModal } = useAppSelector((state) => state.auth);
   const dispatch = useAppDispatch();
 
-  const handleOk = () => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      dispatch(handleShowLoginModal());
-    }, 3000);
-  };
-
   const handleCancel = () => {
+    setVisibleRegisterForm(false);
     dispatch(handleShowLoginModal());
   };
 
@@ -32,32 +29,9 @@ const CsModal: React.FC<ICsModalProps> = ({ title, children, form }) => {
       <Modal
         open={showLoginModal}
         title={title}
-        onOk={handleOk}
         onCancel={handleCancel}
         maskClosable={false}
         afterClose={() => form.resetFields()}
-        // footer={[
-        //   <Button key="back" onClick={handleCancel}>
-        //     Return
-        //   </Button>,
-        //   <Button
-        //     key="submit"
-        //     type="primary"
-        //     loading={loading}
-        //     onClick={handleOk}
-        //   >
-        //     Submit
-        //   </Button>,
-        //   <Button
-        //     key="link"
-        //     href="https://google.com"
-        //     type="primary"
-        //     loading={loading}
-        //     onClick={handleOk}
-        //   >
-        //     Search on Google
-        //   </Button>,
-        // ]}
         footer={null}
       >
         {children}

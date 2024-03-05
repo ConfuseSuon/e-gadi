@@ -68,7 +68,6 @@ const Header = () => {
                 shape="round"
                 onClick={() => {
                   navigate(navigatePath);
-                  console.log(navigatePath, "hellnav");
                 }}
                 loading={!navigatePath}
               >
