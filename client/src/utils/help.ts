@@ -10,3 +10,4 @@ export const showMessage = (
 };
 
 export const obtainToken = localStorage.getItem("accessToken") ?? "";
+export const obtainNavigatePath = localStorage.getItem("navigatePath") ?? "";

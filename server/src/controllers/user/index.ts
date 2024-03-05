@@ -45,14 +45,22 @@ export const registerUser = async (
 
     const savedUserData = await userData.save();
 
+    // Get userData without password
+    const userDataWithoutPassword = {
+      ...savedUserData.toObject(),
+      password: undefined,
+    };
+
     const token = await generateJwtToken(
       { id: savedUserData._id, full_name: savedUserData.full_name },
       "5m"
     );
 
-    return res
-      .status(200)
-      .json({ accessToken: token, message: "Sucessfully, user registered" });
+    return res.status(200).json({
+      accessToken: token,
+      message: "Sucessfully, user registered",
+      data: userDataWithoutPassword,
+    });
   } catch (error) {
     return res
       .status(500)

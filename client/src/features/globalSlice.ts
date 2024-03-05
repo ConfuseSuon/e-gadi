@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { userDataAPI } from "../services/userDataAPI";
 
 interface IbreadCumb {
   title: string;
@@ -18,7 +19,6 @@ const globalSlice = createSlice({
   reducers: {
     handleBreadCumbs: (state, { payload }) => {
       state.breadCumbs = payload;
-      console.log(payload, "hello");
     },
   },
 });

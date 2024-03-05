@@ -7,8 +7,12 @@ import {
 import { Button, Divider, Flex, Form, Input, Typography } from "antd";
 import { Fragment, useEffect } from "react";
 
-import { handleShowLoginModal } from "../../features/authSlice";
+import {
+  handelNavigatePath,
+  handleShowLoginModal,
+} from "../../features/authSlice";
 import { useLoginMutation } from "../../services/authAPI";
+import { useGetCurrentUserQuery } from "../../services/userDataAPI";
 import { useAppDispatch, useAppSelector } from "../../store";
 import CsModal from "../atom/CsModal";
 
@@ -41,9 +45,17 @@ const LoginForm = ({ form }: any) => {
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const handleSubmitForm = async (form: any) => {
-    await login(form);
-    if (accessToken?.length > 0) return dispatch(handleShowLoginModal());
+  const { refetch } = useGetCurrentUserQuery();
+
+  const handleSubmitForm = async (formData: any) => {
+    await login(formData);
+    if (accessToken?.length > 0) {
+      dispatch(handleShowLoginModal());
+    }
+    refetch();
+    setTimeout(() => {
+      dispatch(handelNavigatePath());
+    }, 2000);
   };
   return (
     <Fragment>

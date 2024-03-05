@@ -1,7 +1,7 @@
 // Need to use the React-specific entry point to allow generating React hooks
 
 import { showMessage } from "../utils/help";
-import { apiSlice } from "./apiSlice";
+import apiSlice from "./apiSlice";
 
 export const newCarAPI = apiSlice.injectEndpoints({
   endpoints: (builder) => ({

@@ -1,11 +1,6 @@
 import {
-  CarOutlined,
-  FileOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  PieChartOutlined,
-  TagOutlined,
-  TeamOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
@@ -16,7 +11,6 @@ import {
   Flex,
   Layout,
   Menu,
-  Tag,
   Typography,
   theme,
 } from "antd";
@@ -24,34 +18,20 @@ import React, { useState } from "react";
 import { NavigateFunction, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/carousel/logo.png";
 import { handleLogout } from "../../features/authSlice";
+import { useGetCurrentUserQuery } from "../../services/userDataAPI";
 import { useAppDispatch, useAppSelector } from "../../store";
+import { sidebarMenuItem } from "../../utils/menuPath";
 
 const { Header, Content, Footer, Sider } = Layout;
 
-type MenuItem = Required<MenuProps>["items"][number];
-
-function getItem(
-  label: React.ReactNode,
-  key: React.Key,
-  icon?: React.ReactNode,
-  children?: MenuItem[]
-): MenuItem {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  } as MenuItem;
-}
-
-const dashboardItems: MenuItem[] = [
-  getItem("Dashboard", "/dashboard", <PieChartOutlined />),
-  getItem("Users", "/dashboard/users", <TeamOutlined />),
-  getItem("New Electric Car", "/dashboard/new-electric-car", <CarOutlined />),
-  getItem("Used Cars", "/dashboard/used-cars", <TagOutlined />),
-];
-
 const DashboardLayout: React.FC = () => {
+  useGetCurrentUserQuery();
+  const { loggedInUser } = useAppSelector((state) => state.auth);
+  console.log("hello", "rerender happeen", loggedInUser);
+
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
   const dispatch = useAppDispatch();
   const { breadCumbs } = useAppSelector((state) => state.global);
   const navigate: NavigateFunction = useNavigate();
@@ -78,9 +58,9 @@ const DashboardLayout: React.FC = () => {
     },
   ];
 
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
+  const validatedMenuItems = sidebarMenuItem.filter(
+    (menu) => menu.guard === (loggedInUser as any)?.role
+  );
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -109,7 +89,7 @@ const DashboardLayout: React.FC = () => {
             marginTop: "1rem",
             background: "#eff0f3",
           }}
-          items={dashboardItems}
+          items={validatedMenuItems}
           selectedKeys={activeMenu}
           onSelect={({ selectedKeys, key }) => {
             setActiveMenu(selectedKeys);

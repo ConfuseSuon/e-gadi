@@ -8,6 +8,7 @@ import newCarRouter from "./routes/newCar";
 import uploadImageRouter from "./routes/upload";
 import usedCarRouter from "./routes/usedCar";
 import userRouter from "./routes/user";
+import userDataRouter from "./routes/userData";
 
 const app: Express = express();
 const uri: string = process.env.MONGODB_URI as string;
@@ -27,6 +28,7 @@ app.use("/api/auth", authRouter);
 app.use("/api/auth", userRouter);
 app.use("/api/upload", uploadImageRouter);
 app.use(authMiddleware);
+app.use("/api/user/", userDataRouter);
 app.use("/api/car", newCarRouter);
 app.use("/api/car", usedCarRouter);
 

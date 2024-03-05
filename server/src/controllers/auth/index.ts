@@ -26,9 +26,12 @@ export const loginUser = async (
         "2h"
       );
 
+      // user details excluding password
+      (user as any).password = undefined;
+
       return res
         .status(200)
-        .json({ accessToken: token, message: "Login sucessfull!" });
+        .json({ accessToken: token, message: "Login sucessfull!", data: user });
     } else {
       return res.status(401).json({ message: userMsg.notValid });
     }

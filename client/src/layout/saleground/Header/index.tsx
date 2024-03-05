@@ -16,8 +16,10 @@ import { headerMenuItem } from "../../../utils/menuPath";
 
 const Header = () => {
   const dispatch = useAppDispatch();
-  const { accessToken } = useAppSelector((store) => store.auth);
   const navigate = useNavigate();
+  const { accessToken, navigatePath, loggedInUser } = useAppSelector(
+    (store) => store.auth
+  );
   const { pathname } = window.location;
   const currentPathName = pathname === "/" ? ["home"] : [pathname];
   const [activeMenu, setActiveMenu] = useState(currentPathName);
@@ -60,11 +62,15 @@ const Header = () => {
                 }}
               />
             </Tooltip>
-            {accessToken ? (
+            {loggedInUser ? (
               <Button
                 type="text"
                 shape="round"
-                onClick={() => navigate("/dashboard")}
+                onClick={() => {
+                  navigate(navigatePath);
+                  console.log(navigatePath, "hellnav");
+                }}
+                loading={!navigatePath}
               >
                 Dashboard
               </Button>

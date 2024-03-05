@@ -24,7 +24,7 @@ const baseQuery: BaseQueryFn<
   },
 });
 
-export const baseQueryWithReauth: BaseQueryFn<
+const baseQueryWithReauth: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
@@ -37,16 +37,11 @@ export const baseQueryWithReauth: BaseQueryFn<
   return result;
 };
 
-export const apiSlice = createApi({
+const apiSlice = createApi({
   reducerPath: "api",
-  tagTypes: ["NewCars"],
+  tagTypes: ["NewCars", "userAuth"],
   baseQuery: baseQueryWithReauth,
   endpoints: (builder) => ({}),
 });
 
-// export const newCarAPISlice = createApi({
-//   reducerPath: "newCarAPI",
-//   baseQuery: baseQueryWithReauth,
-//   tagTypes: ["NewCars"],
-//   endpoints: (builder) => ({}),
-// });
+export default apiSlice;
