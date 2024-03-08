@@ -1,24 +1,11 @@
-import {
-  Button,
-  Card,
-  Col,
-  Flex,
-  Form,
-  Input,
-  InputNumber,
-  Row,
-  Typography,
-} from "antd";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Card } from "antd";
+import { useEffect } from "react";
 import { handleBreadCumbs } from "../../../features/globalSlice";
 import { useAppDispatch } from "../../../store";
 import NewElectricCarForm from "./NewElectricCarForm";
 
 const AddNewElectricCar = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
-  const [form] = Form.useForm();
 
   useEffect(() => {
     dispatch(

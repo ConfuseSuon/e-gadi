@@ -19,7 +19,7 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     address: {
       type: String,
     },
-    contact_number: {
+    contactNumber: {
       type: Number,
     },
     socialMedia: {
@@ -28,6 +28,9 @@ const userSchema: Schema<IUser> = new mongoose.Schema(
     role: {
       type: String,
       required: true,
+    },
+    imageURL: {
+      type: String,
     },
   },
   { timestamps: true }

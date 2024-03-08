@@ -4,6 +4,8 @@ import AddNewElectricCar from "../container/dashboard/new-electric-car/AddNewEle
 import EditNewElectricCar from "../container/dashboard/new-electric-car/EditNewElectricCar";
 import Profile from "../container/dashboard/profile";
 import SellYourCar from "../container/dashboard/sell-your-car";
+import AddYourCar from "../container/dashboard/sell-your-car/AddYourCar";
+import EditYourCar from "../container/dashboard/sell-your-car/EditYourCar";
 import UsedCars from "../container/dashboard/used-cars";
 import Users from "../container/dashboard/users";
 
@@ -100,6 +102,22 @@ const DashboardRoutes = (loggedInUserData: any) => ({
       element: (
         <RolePermission requiredRole={"user"} loggedUserData={loggedInUserData}>
           <SellYourCar />
+        </RolePermission>
+      ),
+    },
+    {
+      path: "/dashboard/sell-your-car/add",
+      element: (
+        <RolePermission requiredRole={"user"} loggedUserData={loggedInUserData}>
+          <AddYourCar />
+        </RolePermission>
+      ),
+    },
+    {
+      path: "/dashboard/sell-your-car/edit",
+      element: (
+        <RolePermission requiredRole={"user"} loggedUserData={loggedInUserData}>
+          <EditYourCar />
         </RolePermission>
       ),
     },

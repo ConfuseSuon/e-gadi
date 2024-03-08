@@ -85,6 +85,7 @@ const authSlice = createSlice({
       userDataAPI.endpoints.getCurrentUser.matchFulfilled,
       (state, { payload }) => {
         state.loggedInUser = payload;
+        console.log(state.loggedInUser, "hi");
       }
     );
   },

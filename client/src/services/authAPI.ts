@@ -18,6 +18,7 @@ export const authAPI = apiSlice.injectEndpoints({
         showMessage("error", baseQueryReturnValue?.data?.message);
         return baseQueryReturnValue?.data;
       },
+      invalidatesTags: ["UserAuth"],
     }),
   }),
 });

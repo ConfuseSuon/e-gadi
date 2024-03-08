@@ -3,10 +3,12 @@ import { Document } from "mongoose";
 export interface IUser extends Document {
   full_name: string;
   email: string;
+  currentPassword?: string;
   password: string;
   address?: string;
-  contact_number?: number;
+  contactNumber?: number;
   socialMedia?: object[];
+  imageURL?: string;
   role: string;
 }
 
@@ -25,13 +27,16 @@ export interface INewCar extends Document {
 }
 
 export interface IUsedCar extends Document {
-  car_brand: string;
-  car_model: string;
+  carBrand: string;
+  carModel: string;
   ownership: string;
-  price: string;
-  kms_driven: number;
+  price: number;
+  kmsDriven: number;
   address: string;
-  image_urls: string;
+  imageURL: string;
   description: string;
   createdBy: string;
+  sellerName?: string;
+  contactNumber?: number;
+  socialMedia?: object[];
 }
