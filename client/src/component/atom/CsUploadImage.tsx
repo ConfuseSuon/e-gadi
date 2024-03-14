@@ -1,7 +1,7 @@
 import { message, Upload, UploadFile } from "antd";
 import axios from "axios";
 import { useState } from "react";
-import { ref5 } from "../../container/dashboard/profile";
+
 import { useAppSelector } from "../../store";
 
 const CsImageUpload = ({ imageUrl, imageUrlChange, isImageUploading }: any) => {

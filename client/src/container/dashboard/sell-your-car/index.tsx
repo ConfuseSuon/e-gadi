@@ -74,7 +74,7 @@ const SellYourCar = () => {
           if (item) {
             return (
               <img
-                src={item}
+                src={item[0]}
                 alt="Car image"
                 style={{ width: "50px", height: "auto" }}
               />
@@ -153,7 +153,6 @@ const SellYourCar = () => {
         >
           Add Your Car
         </Button>
-        <Button style={{ marginLeft: "1rem" }}>hello</Button>
       </ViewHeader>
 
       <Table columns={columns} dataSource={data} />

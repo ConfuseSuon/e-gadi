@@ -88,7 +88,7 @@ const UsedCars = () => {
           if (item) {
             return (
               <img
-                src={item}
+                src={item[0]}
                 alt="Car image"
                 style={{ width: "50px", height: "auto" }}
               />

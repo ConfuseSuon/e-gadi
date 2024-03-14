@@ -1,12 +1,13 @@
 import { Avatar, Button, Col, Flex, Layout, Menu, Row, Tooltip } from "antd";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { LoginOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import logo from "../../../assets/carousel/logo.png";
 import Login from "../../../component/organism/Login";
 import {
+  handelNavigatePath,
   handleLogout,
   handleShowLoginModal,
 } from "../../../features/authSlice";
@@ -23,6 +24,11 @@ const Header = () => {
   const { pathname } = window.location;
   const currentPathName = pathname === "/" ? ["home"] : [pathname];
   const [activeMenu, setActiveMenu] = useState(currentPathName);
+
+  useEffect(() => {
+    dispatch(handelNavigatePath());
+  }, [accessToken, loggedInUser]);
+
   return (
     <Layout.Header
       style={{

@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { handleBreadCumbs } from "../../features/globalSlice";
 
-import { useGetCurrentUserQuery } from "../../services/userDataAPI";
 import { useAppDispatch, useAppSelector } from "../../store";
 
 const Dashboard = () => {

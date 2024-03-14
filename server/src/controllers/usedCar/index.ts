@@ -10,7 +10,7 @@ export const getUsedCars = async (
 ): Promise<Response> => {
   try {
     const usedCars: IUsedCar[] = await UsedCar.find();
-    console.log(req);
+
     return res
       .status(200)
       .json({ message: Generic_Msg.Get_All, data: usedCars });

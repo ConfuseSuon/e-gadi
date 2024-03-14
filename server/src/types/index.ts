@@ -11,6 +11,7 @@ export interface IUser extends Document {
   imageURL?: string;
   role: string;
   verified?: boolean;
+  passwordVerified?: boolean;
 }
 
 export interface INewCar extends Document {
@@ -23,7 +24,7 @@ export interface INewCar extends Document {
   charging_0_to_100: number;
   seatingCapacity: number;
   price: number;
-  imageURL: string;
+  imageURL: string[];
   createdBy: string;
 }
 
@@ -34,7 +35,7 @@ export interface IUsedCar extends Document {
   price: number;
   kmsDriven: number;
   address: string;
-  imageURL: string;
+  imageURL: string[];
   description: string;
   createdBy: string;
   sellerName?: string;

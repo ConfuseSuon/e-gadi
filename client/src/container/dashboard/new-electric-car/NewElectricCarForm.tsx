@@ -2,28 +2,41 @@ import { Button, Col, Flex, Form, Input, InputNumber, Row } from "antd";
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import CsUploadImage from "../../../component/atom/CsUploadImage";
+import CsMulImageUpload from "../../../component/atom/CsMulUploadImage";
+
+import { uid } from "uid";
 import {
   usePostNewCarMutation,
   useUpdateNewCarMutation,
 } from "../../../services/newCarAPI";
+import { IMulImage } from "../sell-your-car/YourCarForm";
 
 const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
   const navigate = useNavigate();
   const [form] = Form.useForm();
-  const [imageUrl, setImageUrl] = useState(initialValues?.imageURL ?? "");
+  const [imageUrl, setImageUrl] = useState<IMulImage[]>(
+    initialValues
+      ? initialValues?.imageURL?.map((url: string) => ({ url, uid: uid() }))
+      : []
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   const [postNewCar, { isLoading: postLoading }] = usePostNewCarMutation();
   const [updateNewCar, { isLoading: updateLoading }] =
     useUpdateNewCarMutation();
 
-  function imageUrlChange(url: any) {
-    setImageUrl(url);
+  function imageUrlChange(url: string, uid: string) {
+    setImageUrl((prevValues) => [...prevValues, { url, uid }]);
+  }
+
+  function removeImage(file: any) {
+    setImageUrl((prevValues) =>
+      prevValues.filter((value) => value.uid !== file.uid)
+    );
   }
 
   const onFinish = (form: any) => {
-    form.imageURL = imageUrl;
+    form.imageURL = imageUrl.map((image) => image.url);
     if (!!initialValues) {
       try {
         updateNewCar({ formData: form, id: initialValues?._id });
@@ -166,7 +179,8 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
               }),
             ]}
           >
-            <CsUploadImage
+            <CsMulImageUpload
+              removeImage={removeImage}
               imageUrl={imageUrl}
               imageUrlChange={imageUrlChange}
               isImageUploading={setLoading}

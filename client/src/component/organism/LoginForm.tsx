@@ -5,11 +5,12 @@ import {
   handleShowLoginModal,
 } from "../../features/authSlice";
 import { useLoginMutation } from "../../services/authAPI";
-import { useGetCurrentUserQuery } from "../../services/userDataAPI";
+
 import { useAppDispatch, useAppSelector } from "../../store";
 
 import { Fragment } from "react";
 import { validateEmail } from "../../utils/help";
+import CsGoogleLogin from "./CsGoogleLogin";
 
 const LoginForm = ({ form, setVisibleRegisterForm }: any) => {
   const { accessToken } = useAppSelector((state) => state.auth);
@@ -17,18 +18,14 @@ const LoginForm = ({ form, setVisibleRegisterForm }: any) => {
 
   const [login, { isLoading }] = useLoginMutation();
 
-  const { refetch } = useGetCurrentUserQuery();
-
   const handleSubmitForm = async (formData: any) => {
     await login(formData);
     if (accessToken?.length > 0) {
       dispatch(handleShowLoginModal());
     }
-    refetch();
-    setTimeout(() => {
-      dispatch(handelNavigatePath());
-    }, 2000);
+    dispatch(handelNavigatePath());
   };
+
   return (
     <Fragment>
       <Divider />
@@ -82,7 +79,8 @@ const LoginForm = ({ form, setVisibleRegisterForm }: any) => {
         <Typography.Text>OR</Typography.Text>{" "}
       </Divider>
       <Flex align="center" vertical gap={20}>
-        <Button>Login with Google</Button>
+        <CsGoogleLogin />
+
         <div onClick={() => setVisibleRegisterForm(true)}>
           <Typography.Text>
             Don't have an account yet?{" "}

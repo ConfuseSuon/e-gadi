@@ -16,7 +16,7 @@ import { useAppDispatch, useAppSelector } from "../../store";
 
 const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
-  const { refetch } = useGetCurrentUserQuery();
+  // const { refetch } = useGetCurrentUserQuery();
   const dispatch = useAppDispatch();
   const { accessToken } = useAppSelector((state) => state.auth);
 
@@ -39,7 +39,7 @@ const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
     if (accessToken?.length > 0) {
       dispatch(handleShowLoginModal());
     }
-    refetch();
+    // refetch();
     setTimeout(() => {
       dispatch(handelNavigatePath());
     }, 2000);

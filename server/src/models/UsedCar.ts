@@ -9,7 +9,7 @@ const usedCarSchema: Schema<IUsedCar> = new mongoose.Schema(
     price: { type: Number, required: true },
     kmsDriven: { type: Number, required: true },
     address: { type: String, required: true },
-    imageURL: { type: String, required: true },
+    imageURL: { type: [String], required: true },
     description: { type: String, required: true },
     createdBy: { type: String, required: true },
     contactNumber: { type: Number },

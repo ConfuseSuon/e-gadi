@@ -17,7 +17,7 @@ const PORT: string | number = process.env.PORT || 3000;
 app.use(
   cors({
     origin: "http://localhost:4444",
-    allowedHeaders: ["Content-Type", "x-auth-token"],
+    allowedHeaders: ["Content-Type", "x-auth-token", "google-auth-token"],
     methods: ["GET", "POST", "PUT", "DELETE"],
   })
 );

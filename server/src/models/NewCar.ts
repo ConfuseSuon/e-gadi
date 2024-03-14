@@ -12,7 +12,7 @@ const newCarSchema: Schema<INewCar> = new mongoose.Schema(
     charging_0_to_100: { type: Number, required: true },
     seatingCapacity: { type: Number, required: true },
     price: { type: Number, required: true },
-    imageURL: { type: String, required: true },
+    imageURL: { type: [String], required: true },
     createdBy: { type: String, required: true },
   },
   { timestamps: true }

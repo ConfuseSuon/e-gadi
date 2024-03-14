@@ -28,9 +28,8 @@ import { sidebarMenuItem } from "../../utils/menuPath";
 const { Header, Content, Footer, Sider } = Layout;
 
 const DashboardLayout: React.FC = () => {
-  useGetCurrentUserQuery();
   const { loggedInUser } = useAppSelector((state) => state.auth);
-
+  useGetCurrentUserQuery();
   const {
     token: { colorBgContainer, borderRadiusLG },
   } = theme.useToken();

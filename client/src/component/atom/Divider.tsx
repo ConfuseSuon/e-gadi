@@ -15,7 +15,7 @@ const CsDivider = ({ dividerSize, title }: CsDivider) => {
             style={{
               background: "#ff8e3c",
               borderRadius: "19px",
-              height: ".4rem",
+              height: ".3rem",
             }}
           />
         </Col>

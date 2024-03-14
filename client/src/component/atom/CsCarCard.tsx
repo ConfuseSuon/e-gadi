@@ -5,7 +5,7 @@ const CsCarCard = () => {
     <Card
       hoverable={true}
       bordered
-      style={{ width: 300 }}
+      style={{ width: 360 }}
       cover={<img alt="example" src={cardCar} />}
       actions={[
         <Tag color="#55acee" style={{ marginTop: ".3rem" }}>

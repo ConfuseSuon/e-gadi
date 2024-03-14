@@ -66,7 +66,7 @@ const NewElectricCar: React.FC = () => {
           if (item) {
             return (
               <img
-                src={item}
+                src={item[0]}
                 alt="New car image"
                 style={{ width: "50px", height: "auto" }}
               />

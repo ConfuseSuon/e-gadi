@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { OAuth2Client } from "google-auth-library";
 import User from "../../models/User";
 import { IUser } from "../../types";
 import { Generic_Msg, userMsg } from "../../utils/constant";
@@ -35,6 +36,67 @@ export const loginUser = async (
     } else {
       return res.status(401).json({ message: userMsg.notValid });
     }
+  } catch (error) {
+    return res
+      .status(500)
+      .json({ message: Generic_Msg.Server_Error, error: error });
+  }
+};
+
+export const loginWithGoogle = async (req: Request, res: Response) => {
+  try {
+    const client = new OAuth2Client();
+    const {
+      body: { accessToken },
+    } = req;
+
+    if (!accessToken)
+      return res.status(401).json({ message: "Something went wrong..." });
+
+    async function verify() {
+      const ticket = await client.verifyIdToken({
+        idToken: accessToken,
+        audience:
+          "886062611278-j96irk5c6udfurhdf656svr969me1l3d.apps.googleusercontent.com",
+      });
+      const { email, name, picture }: any = ticket.getPayload();
+
+      // Checking Existing User
+      const userData: Pick<IUser, "_id" | "full_name"> | null =
+        await User.findOne({ email });
+
+      if (!userData) {
+        const newUser: IUser = new User({
+          full_name: name,
+          email,
+          role: "user",
+          verified: false,
+          imageURL: picture,
+          passwordVerified: false,
+        });
+        const savedUserData = await newUser.save();
+        return res.status(200).json({
+          accessToken,
+          message: "Sucessfully, user registered",
+          data: savedUserData,
+        });
+      } else {
+        (userData as any).password = undefined;
+        return res.status(200).json({
+          accessToken,
+          message: "Login sucessfull!",
+          data: {
+            full_name: name,
+            email,
+            role: "user",
+            verified: false,
+            imageURL: picture,
+          },
+        });
+      }
+    }
+
+    verify().catch(console.error);
   } catch (error) {
     return res
       .status(500)
