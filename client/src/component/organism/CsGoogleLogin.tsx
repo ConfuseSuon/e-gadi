@@ -8,6 +8,7 @@ const CsGoogleLogin = () => {
   return (
     <>
       <GoogleLogin
+        width={100}
         onSuccess={(credentialResponse) => {
           const body = { accessToken: credentialResponse?.credential };
           loginWithGoogle(body);
@@ -16,6 +17,7 @@ const CsGoogleLogin = () => {
           console.log("Login Failed");
         }}
         text={"continue_with"}
+        useOneTap
       />
     </>
   );

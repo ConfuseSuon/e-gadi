@@ -11,12 +11,11 @@ import {
   handleShowLoginModal,
 } from "../../features/authSlice";
 import { useRegisterUserMutation } from "../../services/user";
-import { useGetCurrentUserQuery } from "../../services/userDataAPI";
 import { useAppDispatch, useAppSelector } from "../../store";
+import CsGoogleLogin from "./CsGoogleLogin";
 
 const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
   const [registerUser, { isLoading }] = useRegisterUserMutation();
-  // const { refetch } = useGetCurrentUserQuery();
   const dispatch = useAppDispatch();
   const { accessToken } = useAppSelector((state) => state.auth);
 
@@ -146,7 +145,7 @@ const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
         <Typography.Text>OR</Typography.Text>{" "}
       </Divider>
       <Flex align="center" vertical gap={20}>
-        <Button>Login with Google</Button>
+        <CsGoogleLogin />
         <div onClick={() => setVisibleRegisterForm(false)}>
           <Typography.Text>
             Already have an account? <Typography.Link>Login</Typography.Link>{" "}

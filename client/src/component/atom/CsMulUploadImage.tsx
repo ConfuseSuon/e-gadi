@@ -16,7 +16,11 @@ const CsMulImageUpload = ({
   );
 
   async function beforeUpload(file: File) {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    const isJpgOrPng =
+      file.type === "image/jpeg" ||
+      file.type === "image/png" ||
+      file.type === "image/avif" ||
+      file.type === "image/webp";
     if (!isJpgOrPng) {
       message.error("You can only upload JPG/PNG file!");
     }
@@ -90,7 +94,7 @@ const CsMulImageUpload = ({
         beforeUpload={beforeUpload}
         maxCount={4}
         onRemove={onRemove}
-        accept=".png, .jpg"
+        accept=".png, .jpg, .webp, .avif"
         multiple={true}
       >
         {fileList.length < 4 && "+ Upload"}
