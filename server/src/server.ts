@@ -4,6 +4,7 @@ import express, { Express, Request, Response } from "express";
 import mongoose from "mongoose";
 import { authMiddleware } from "./middleware/auth";
 import authRouter from "./routes/auth";
+import compareCarRouter from "./routes/compareCar";
 import newCarRouter from "./routes/newCar";
 import uploadImageRouter from "./routes/upload";
 import usedCarRouter from "./routes/usedCar";
@@ -31,6 +32,7 @@ app.use(authMiddleware);
 app.use("/api/user/", userDataRouter);
 app.use("/api/car", newCarRouter);
 app.use("/api/car", usedCarRouter);
+app.use("/api/compare-car", compareCarRouter);
 
 console.log("Loading...");
 mongoose

@@ -41,4 +41,5 @@ export interface IUsedCar extends Document {
   sellerName?: string;
   contactNumber?: number;
   socialMedia?: object[];
+  slug: string;
 }

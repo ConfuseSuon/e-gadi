@@ -62,7 +62,7 @@ export const loginWithGoogle = async (req: Request, res: Response) => {
       const { email, name, picture }: any = ticket.getPayload();
 
       // Checking Existing User
-      const userData: Pick<IUser, "_id" | "full_name"> | null =
+      const userData: Pick<IUser, "_id" | "full_name" | "verified"> | null =
         await User.findOne({ email });
 
       if (!userData) {
@@ -89,7 +89,7 @@ export const loginWithGoogle = async (req: Request, res: Response) => {
             full_name: name,
             email,
             role: "user",
-            verified: false,
+            verified: userData?.verified ?? false,
             imageURL: picture,
           },
         });

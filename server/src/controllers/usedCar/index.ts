@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { uid } from "uid";
 import UsedCar from "../../models/UsedCar";
 import User from "../../models/User";
 import { IUsedCar, IUser } from "../../types";
@@ -86,6 +87,7 @@ export const addUsedCar = async (
       imageURL,
       description,
       createdBy: creatorId,
+      slug: `http://localhost:4444/salesground/used-cars/${uid()}`,
     });
 
     // adding user info

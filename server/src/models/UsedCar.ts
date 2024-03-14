@@ -17,6 +17,10 @@ const usedCarSchema: Schema<IUsedCar> = new mongoose.Schema(
     socialMedia: {
       type: [Object],
     },
+    slug: {
+      type: String,
+      required: true,
+    },
   },
   { timestamps: true }
 );
