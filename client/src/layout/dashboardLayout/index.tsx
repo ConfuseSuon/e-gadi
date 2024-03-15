@@ -11,13 +11,14 @@ import {
   Breadcrumb,
   Button,
   Flex,
+  Grid,
   Layout,
   Menu,
   Popconfirm,
   Typography,
   theme,
 } from "antd";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigateFunction, Outlet, useNavigate } from "react-router-dom";
 import logo from "../../assets/carousel/logo.png";
 import { handleLogout } from "../../features/authSlice";
@@ -31,12 +32,18 @@ const DashboardLayout: React.FC = () => {
   const { loggedInUser } = useAppSelector((state) => state.auth);
   useGetCurrentUserQuery();
   const {
-    token: { colorBgContainer, borderRadiusLG },
+    token: { borderRadiusLG },
   } = theme.useToken();
+  const screen = Grid.useBreakpoint();
+  console.log(screen);
   const dispatch = useAppDispatch();
   const { breadCumbs } = useAppSelector((state) => state.global);
   const navigate: NavigateFunction = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+
+  useEffect(() => {
+    screen?.xs ? setCollapsed(true) : null;
+  }, [screen]);
 
   const { pathname } = window.location;
   const currentPathName = [pathname];
@@ -139,7 +146,9 @@ const DashboardLayout: React.FC = () => {
               width: 64,
               height: 64,
             }}
+            disabled={screen?.xs ? true : false}
           />
+          <Button type="text"></Button>
           <Menu mode="horizontal" items={items} />
         </Header>
         <Content style={{ margin: "0 16px", background: "white" }}>

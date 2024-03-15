@@ -39,37 +39,35 @@ const SellYourCar = () => {
         title: "Brand",
         dataIndex: "carBrand",
         key: "car_brand",
-        ellipsis: true,
-        width: "20%",
+        width: "6rem",
       },
       {
         title: "Model",
         dataIndex: "carModel",
         key: "carModel",
-        ellipsis: true,
-        width: "20%",
+
+        width: "5rem",
       },
       {
         title: "Description",
         dataIndex: "description",
         key: "description",
         ellipsis: true,
-        width: "25%",
+        width: "30rem",
       },
       {
         title: "Created",
         dataIndex: "createdAt",
         key: "createdAt",
-        ellipsis: true,
-        width: "25%",
+
+        width: "10rem",
         render: (value: string) => moment(value).format("LL"),
       },
       {
         title: "Picture",
         dataIndex: "imageURL",
         key: "imageURL",
-        width: "20%",
-        ellipsis: true,
+        width: "10rem",
         render: (item) => {
           if (item) {
             return (
@@ -93,7 +91,7 @@ const SellYourCar = () => {
       {
         title: "Action",
         key: "action",
-        width: "15%",
+        width: "10rem",
         render: (_: any, record: any) => {
           return (
             <Space>
@@ -155,7 +153,11 @@ const SellYourCar = () => {
         </Button>
       </ViewHeader>
 
-      <Table columns={columns} dataSource={data} />
+      <Table
+        columns={columns}
+        dataSource={data}
+        style={{ overflowX: "scroll" }}
+      />
 
       <CsDeleteConfirmation
         visible={visibleDeleteConfirmation}

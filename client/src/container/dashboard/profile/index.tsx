@@ -1,24 +1,25 @@
 import { LockOutlined } from "@ant-design/icons";
 import {
+  Avatar,
   Button,
   Card,
   Col,
   Flex,
   Form,
-  Image,
+  Grid,
   Input,
   Row,
   Spin,
   Typography,
 } from "antd";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import CsImageUpload from "../../../component/atom/CsUploadImage";
 import { handleBreadCumbs } from "../../../features/globalSlice";
 import { useUpdateUserMutation } from "../../../services/user";
 import { useGetCurrentUserAllDataQuery } from "../../../services/userDataAPI";
-import { useAppDispatch, useAppSelector } from "../../../store";
+import { useAppDispatch } from "../../../store";
 
 export const ref1 = { current: null };
 export const ref2 = { current: null };
@@ -29,7 +30,8 @@ export const ref6 = { current: null };
 
 const Profile = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
+  const screen = Grid.useBreakpoint();
+
   const [form] = Form.useForm();
 
   // const {} =   useAppSelector((state) => state.auth)
@@ -76,8 +78,8 @@ const Profile = () => {
             onFinish={onFinish}
             scrollToFirstError
           >
-            <Row gutter={[16, 0]}>
-              <Col span={12}>
+            <Row gutter={[20, 0]}>
+              <Col xs={{ span: 24 }} md={{ span: 12 }}>
                 <Form.Item
                   label="Full Name"
                   name="full_name"
@@ -301,8 +303,11 @@ const Profile = () => {
                   </Flex>
                 </Form.Item>
               </Col>
-              <Col>
-                <Image height={200} src={data?.imageURL ?? ""} />
+
+              <Col style={{ display: screen?.xs ? "none" : "" }}>
+                {data?.imageURL ? (
+                  <Avatar src={data?.imageURL} size={200} shape="square" />
+                ) : null}
               </Col>
             </Row>
           </Form>
