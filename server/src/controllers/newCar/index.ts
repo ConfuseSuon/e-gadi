@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { uid } from "uid";
 import NewCar from "../../models/NewCar";
 import { INewCar } from "../../types";
 import { Generic_Msg } from "../../utils/constant";
@@ -90,6 +91,7 @@ export const addNewCar = async (
       imageURL,
       description,
       createdBy: creatorId,
+      identity: uid(),
     });
 
     const addedNewCar: INewCar | null = await data.save();

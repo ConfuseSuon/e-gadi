@@ -14,6 +14,7 @@ const newCarSchema: Schema<INewCar> = new mongoose.Schema(
     price: { type: Number, required: true },
     imageURL: { type: [String], required: true },
     createdBy: { type: String, required: true },
+    identity: { type: String, required: true },
   },
   { timestamps: true }
 );

@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import CompareCars from "../container/salesground/compare-cars";
 import Home from "../container/salesground/home";
 import NewCars from "../container/salesground/new-cars";
 import UsedCars from "../container/salesground/used-cars";
@@ -29,6 +30,14 @@ const MainRoutes = {
       element: (
         <Suspense fallback="Loading...">
           <UsedCars />
+        </Suspense>
+      ),
+    },
+    {
+      path: "/salesground/compare-cars",
+      element: (
+        <Suspense fallback="Loading...">
+          <CompareCars />
         </Suspense>
       ),
     },

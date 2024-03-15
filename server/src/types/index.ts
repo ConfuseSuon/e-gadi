@@ -26,6 +26,7 @@ export interface INewCar extends Document {
   price: number;
   imageURL: string[];
   createdBy: string;
+  identity: string;
 }
 
 export interface IUsedCar extends Document {

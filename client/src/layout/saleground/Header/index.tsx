@@ -1,4 +1,14 @@
-import { Avatar, Button, Col, Flex, Layout, Menu, Row, Tooltip } from "antd";
+import {
+  Avatar,
+  Button,
+  Col,
+  Flex,
+  Grid,
+  Layout,
+  Menu,
+  Row,
+  Tooltip,
+} from "antd";
 
 import { useEffect, useState } from "react";
 
@@ -16,6 +26,8 @@ import { useAppDispatch, useAppSelector } from "../../../store";
 import { headerMenuItem } from "../../../utils/menuPath";
 
 const Header = () => {
+  const screen = Grid.useBreakpoint();
+
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { accessToken, navigatePath, loggedInUser } = useAppSelector(
@@ -38,7 +50,12 @@ const Header = () => {
       }}
     >
       <Row justify={"space-between"} align={"middle"}>
-        <Col span={6}>
+        <Col
+          xs={{ span: 5 }}
+          sm={{ span: 5 }}
+          md={{ span: 6 }}
+          lg={{ span: 4 }}
+        >
           <Flex justify="flex-end">
             <Avatar size={70} src={logo} shape={"square"} />
           </Flex>
@@ -54,8 +71,13 @@ const Header = () => {
             }}
           />
         </Col>
-        <Col>
-          <Flex wrap="wrap" gap="small">
+        <Col
+          xs={{ span: 8 }}
+          sm={{ span: 5 }}
+          md={{ span: 5 }}
+          lg={{ span: 5 }}
+        >
+          <Flex gap="1">
             <Tooltip arrow title={accessToken ? "Logout" : "Login"}>
               <Button
                 type="primary"

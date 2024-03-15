@@ -28,11 +28,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use("/api/auth", authRouter);
 app.use("/api/auth", userRouter);
 app.use("/api/upload", uploadImageRouter);
+app.use("/api/compare-car", compareCarRouter);
 app.use(authMiddleware);
 app.use("/api/user/", userDataRouter);
 app.use("/api/car", newCarRouter);
 app.use("/api/car", usedCarRouter);
-app.use("/api/compare-car", compareCarRouter);
 
 console.log("Loading...");
 mongoose
