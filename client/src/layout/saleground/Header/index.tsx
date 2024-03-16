@@ -49,75 +49,16 @@ const Header = () => {
         boxShadow: "0 4px 2px -2px rgba(0, 0, 0, 0.2)",
       }}
     >
-      {/* <Row justify={"space-between"} align={"middle"}>
-        <Col
-          xs={{ span: 5 }}
-          sm={{ span: 5 }}
-          md={{ span: 6 }}
-          lg={{ span: 4 }}
-        >
-          <Flex justify="flex-end">
-            <Avatar size={70} src={logo} shape={"square"} />
-          </Flex>
-        </Col>
-        <Col span={10}>
-          <Menu
-            mode="horizontal"
-            items={headerMenuItem}
-            selectedKeys={activeMenu}
-            onSelect={({ selectedKeys, key }) => {
-              setActiveMenu(selectedKeys);
-              key === "home" ? navigate("") : navigate(key);
-            }}
-          />
-        </Col>
-        <Col
-          xs={{ span: 8 }}
-          sm={{ span: 5 }}
-          md={{ span: 5 }}
-          lg={{ span: 5 }}
-        >
-          <Flex gap="1">
-            <Tooltip arrow title={accessToken ? "Logout" : "Login"}>
-              <Button
-                type="primary"
-                shape="circle"
-                icon={<LoginOutlined rotate={accessToken ? 180 : 0} />}
-                onClick={() => {
-                  accessToken
-                    ? dispatch(handleLogout())
-                    : dispatch(handleShowLoginModal());
-                }}
-              />
-            </Tooltip>
-            {loggedInUser ? (
-              <Button
-                type="text"
-                shape="round"
-                onClick={() => {
-                  navigate(navigatePath);
-                }}
-                loading={!navigatePath}
-              >
-                Dashboard
-              </Button>
-            ) : null}
-          </Flex>
-        </Col>
-      </Row> */}
-
       <Row justify={"center"} align={"middle"}>
         <Col span={20}>
           <Row align={"middle"} justify={"space-between"}>
-            <Col
-              // xs={{ span: 5 }}
-              // sm={{ span: 5 }}
-              // md={{ span: 6 }}
-              // lg={{ span: 4 }}
-              span={9}
-            >
+            <Col span={9}>
               <Flex align="center" style={{ width: "100%" }}>
-                <Avatar size={70} src={logo} shape={"square"} />
+                <Avatar
+                  size={screen?.xs ? 55 : 70}
+                  src={logo}
+                  shape={"square"}
+                />
               </Flex>
             </Col>
             <Col span={10}>

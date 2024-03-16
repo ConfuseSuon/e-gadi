@@ -9,8 +9,6 @@ export const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log(req.header("x-auth-token"), "xtoke");
-  console.log(req.header("google-auth-token"), "gToken");
   const client = new OAuth2Client();
 
   const token = req.header("x-auth-token");

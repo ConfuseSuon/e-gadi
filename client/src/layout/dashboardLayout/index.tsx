@@ -148,7 +148,7 @@ const DashboardLayout: React.FC = () => {
             }}
             disabled={screen?.xs ? true : false}
           />
-          <Button type="text"></Button>
+
           <Menu mode="horizontal" items={items} />
         </Header>
         <Content style={{ margin: "0 16px", background: "white" }}>

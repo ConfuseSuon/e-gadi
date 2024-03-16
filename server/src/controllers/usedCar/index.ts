@@ -87,7 +87,7 @@ export const addUsedCar = async (
       imageURL,
       description,
       createdBy: creatorId,
-      slug: `http://localhost:4444/salesground/used-cars/${uid()}`,
+      slug: uid(),
     });
 
     // adding user info
@@ -96,6 +96,7 @@ export const addUsedCar = async (
 
     data["sellerName"] = user?.full_name;
     data["contactNumber"] = user?.contactNumber;
+    data["socialMedia"] = user?.socialMedia;
 
     const addedUsedCar: IUsedCar | null = await data.save();
 
