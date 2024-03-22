@@ -63,7 +63,18 @@ const LoginForm = ({ form, setVisibleRegisterForm }: any) => {
           />
         </Form.Item>
 
-        <Form.Item style={{ margin: "2rem 0 0 0" }}>
+        <Flex justify="center" style={{ marginBottom: "1rem" }}>
+          <span>
+            <Typography.Link
+              onClick={() => setVisibleRegisterForm("RESET-EMAIL-FORM")}
+            >
+              {" "}
+              Reset Password{" "}
+            </Typography.Link>{" "}
+          </span>
+        </Flex>
+
+        <Form.Item style={{ margin: "0 0 0 0" }}>
           <Button
             type="primary"
             htmlType="submit"
@@ -81,11 +92,13 @@ const LoginForm = ({ form, setVisibleRegisterForm }: any) => {
       <Flex align="center" vertical gap={20}>
         <CsGoogleLogin />
 
-        <div onClick={() => setVisibleRegisterForm(true)}>
-          <Typography.Text>
-            Don't have an account yet?{" "}
-            <Typography.Link>Create your account</Typography.Link>{" "}
-          </Typography.Text>
+        <div onClick={() => setVisibleRegisterForm("REGISTER")}>
+          <Flex vertical justify="center" align="center">
+            <Typography.Text>
+              Don't have an account yet?{" "}
+              <Typography.Link>Create your account</Typography.Link>{" "}
+            </Typography.Text>
+          </Flex>
         </div>
       </Flex>
     </Fragment>

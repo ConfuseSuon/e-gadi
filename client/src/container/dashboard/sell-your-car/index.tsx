@@ -38,36 +38,28 @@ const SellYourCar = () => {
       {
         title: "Brand",
         dataIndex: "carBrand",
-        key: "car_brand",
-        width: "6rem",
+        key: "carBrand",
       },
       {
         title: "Model",
         dataIndex: "carModel",
         key: "carModel",
-
-        width: "5rem",
       },
       {
         title: "Description",
         dataIndex: "description",
         key: "description",
-        ellipsis: true,
-        width: "30rem",
       },
       {
         title: "Created",
         dataIndex: "createdAt",
         key: "createdAt",
-
-        width: "10rem",
         render: (value: string) => moment(value).format("LL"),
       },
       {
         title: "Picture",
         dataIndex: "imageURL",
         key: "imageURL",
-        width: "10rem",
         render: (item) => {
           if (item) {
             return (
@@ -91,7 +83,6 @@ const SellYourCar = () => {
       {
         title: "Action",
         key: "action",
-        width: "10rem",
         render: (_: any, record: any) => {
           return (
             <Space>

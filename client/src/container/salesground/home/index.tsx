@@ -79,7 +79,7 @@ const Home: React.FC = () => {
                       options={
                         newCarsList
                           ? newCarsList?.map((car: any) => ({
-                              value: car?._id,
+                              value: `${car?.carBrand} ${car?.carModel}`,
                               label: `${car?.carBrand} ${car?.carModel}`,
                             }))
                           : []

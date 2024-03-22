@@ -2,7 +2,6 @@ import {
   LogoutOutlined,
   MenuFoldOutlined,
   MenuUnfoldOutlined,
-  TagOutlined,
   UserOutlined,
 } from "@ant-design/icons";
 import type { MenuProps } from "antd";
@@ -35,7 +34,7 @@ const DashboardLayout: React.FC = () => {
     token: { borderRadiusLG },
   } = theme.useToken();
   const screen = Grid.useBreakpoint();
-  console.log(screen);
+
   const dispatch = useAppDispatch();
   const { breadCumbs } = useAppSelector((state) => state.global);
   const navigate: NavigateFunction = useNavigate();
@@ -45,13 +44,21 @@ const DashboardLayout: React.FC = () => {
     screen?.xs ? setCollapsed(true) : null;
   }, [screen]);
 
+  useEffect(() => {}, [loggedInUser]);
+
   const { pathname } = window.location;
   const currentPathName = [pathname];
   const [activeMenu, setActiveMenu] = useState(currentPathName);
 
   const items: MenuProps["items"] = [
     {
-      label: <Avatar size={40} icon={<UserOutlined />} />,
+      label: (
+        <Avatar
+          size={40}
+          icon={<UserOutlined />}
+          src={loggedInUser ? (loggedInUser as any)?.imageURL : null}
+        />
+      ),
       key: "SubMenu",
       children: [
         {
@@ -83,7 +90,20 @@ const DashboardLayout: React.FC = () => {
         Logout
       </Popconfirm>
     ),
-    icon: <LogoutOutlined rotate={180} />,
+    icon: collapsed ? (
+      <Popconfirm
+        placement="rightTop"
+        title={"Logout"}
+        description={"Are you sure want to log out?"}
+        okText="Yes"
+        cancelText="No"
+        onConfirm={() => dispatch(handleLogout())}
+      >
+        <LogoutOutlined rotate={180} />
+      </Popconfirm>
+    ) : (
+      <LogoutOutlined rotate={180} />
+    ),
     key: "logout",
   });
 
@@ -168,15 +188,16 @@ const DashboardLayout: React.FC = () => {
           style={{
             position: "sticky",
             bottom: 0,
-            zIndex: "1",
-            height: "3.5rem",
+            zIndex: "10",
             background: "white",
             boxShadow:
               "rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px",
           }}
         >
           <Flex align="center" justify="center" style={{}}>
-            <Typography.Text>
+            <Typography.Text
+              style={{ fontSize: screen?.xs ? ".6rem" : ".8rem" }}
+            >
               E-Gadi ©{new Date().getFullYear()} Created by ConfuseSuon
             </Typography.Text>
           </Flex>

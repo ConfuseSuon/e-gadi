@@ -70,8 +70,6 @@ export const getAllCar = async (
       { carBrand: 1, carModel: 1, identity: 1 }
     );
 
-    console.log(cars, "hello");
-
     const combinedData = cars.map((car) => ({
       id: car._id,
       car: `${car.carBrand} ${car.carModel}`,

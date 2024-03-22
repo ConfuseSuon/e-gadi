@@ -78,6 +78,7 @@ const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
             },
             {
               required: true,
+              message: "Please enter email",
             },
           ]}
           style={{ marginTop: ".4rem" }}
@@ -90,7 +91,12 @@ const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
         </Form.Item>
         <Form.Item
           name="regPassword"
-          rules={[{ required: true }]}
+          rules={[
+            {
+              required: true,
+              message: "Please enter password",
+            },
+          ]}
           validateTrigger="onBlur"
           style={{ marginTop: ".4rem" }}
         >
@@ -104,7 +110,7 @@ const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
         <Form.Item
           name="confirmRegPassword"
           style={{ marginTop: ".4rem" }}
-          dependencies={["password"]}
+          dependencies={["regPassword"]}
           hasFeedback
           rules={[
             {
@@ -146,7 +152,7 @@ const RegisterForm = ({ form, setVisibleRegisterForm }: any) => {
       </Divider>
       <Flex align="center" vertical gap={20}>
         <CsGoogleLogin />
-        <div onClick={() => setVisibleRegisterForm(false)}>
+        <div onClick={() => setVisibleRegisterForm("LOGIN")}>
           <Typography.Text>
             Already have an account? <Typography.Link>Login</Typography.Link>{" "}
           </Typography.Text>

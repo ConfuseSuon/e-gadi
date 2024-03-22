@@ -44,3 +44,10 @@ export interface IUsedCar extends Document {
   socialMedia?: object[];
   slug: string;
 }
+
+export interface IOTP extends Document {
+  email: string;
+  otp: string;
+  type: "forgotPassword";
+  createdAt: any;
+}

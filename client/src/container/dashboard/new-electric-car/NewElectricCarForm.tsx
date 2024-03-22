@@ -1,4 +1,4 @@
-import { Button, Col, Flex, Form, Input, InputNumber, Row } from "antd";
+import { Button, Col, Flex, Form, Grid, Input, InputNumber, Row } from "antd";
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -13,6 +13,7 @@ import { IMulImage } from "../sell-your-car/YourCarForm";
 
 const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
   const navigate = useNavigate();
+  const screen = Grid.useBreakpoint();
   const [form] = Form.useForm();
   const [imageUrl, setImageUrl] = useState<IMulImage[]>(
     initialValues
@@ -62,7 +63,7 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
       scrollToFirstError
     >
       <Row>
-        <Col span={12}>
+        <Col span={screen?.xs ? 24 : 12}>
           <Form.Item
             label="Brand Name"
             name="carBrand"
