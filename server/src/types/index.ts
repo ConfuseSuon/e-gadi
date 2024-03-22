@@ -25,6 +25,9 @@ export interface INewCar extends Document {
   seatingCapacity: number;
   price: number;
   imageURL: string[];
+  madeYear: string;
+  groundClearance: number;
+  extraFeatures: string[];
   createdBy: string;
   identity: string;
 }

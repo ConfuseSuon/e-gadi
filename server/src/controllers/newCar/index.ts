@@ -60,6 +60,9 @@ export const addNewCar = async (
       range,
       imageURL,
       description,
+      madeYear,
+      groundClearance,
+      extraFeatures,
     } = req.body as Pick<
       INewCar,
       | "carBrand"
@@ -72,6 +75,9 @@ export const addNewCar = async (
       | "seatingCapacity"
       | "price"
       | "imageURL"
+      | "madeYear"
+      | "groundClearance"
+      | "extraFeatures"
     >;
 
     const { id: creatorId } = (req as any)?.user;
@@ -90,6 +96,9 @@ export const addNewCar = async (
       range,
       imageURL,
       description,
+      madeYear,
+      groundClearance,
+      extraFeatures,
       createdBy: creatorId,
       identity: uid(),
     });

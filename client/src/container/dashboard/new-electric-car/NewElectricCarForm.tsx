@@ -1,15 +1,37 @@
-import { Button, Col, Flex, Form, Grid, Input, InputNumber, Row } from "antd";
+import {
+  Button,
+  Col,
+  DatePicker,
+  Flex,
+  Form,
+  Grid,
+  Input,
+  InputNumber,
+  Row,
+  Select,
+} from "antd";
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CsMulImageUpload from "../../../component/atom/CsMulUploadImage";
 
+import moment from "moment";
 import { uid } from "uid";
 import {
   usePostNewCarMutation,
   useUpdateNewCarMutation,
 } from "../../../services/newCarAPI";
 import { IMulImage } from "../sell-your-car/YourCarForm";
+
+const config = {
+  rules: [
+    {
+      type: "object" as const,
+      required: true,
+      message: "Please enter made year",
+    },
+  ],
+};
 
 const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
   const navigate = useNavigate();
@@ -38,21 +60,23 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
 
   const onFinish = (form: any) => {
     form.imageURL = imageUrl.map((image) => image.url);
-    if (!!initialValues) {
-      try {
-        updateNewCar({ formData: form, id: initialValues?._id });
-        return navigate(-1);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      try {
-        postNewCar(form);
-        return navigate(-1);
-      } catch (error) {
-        console.log(error);
-      }
-    }
+    form.madeYear = form.madeYear.format("YYYY");
+    console.log(form, "hello");
+    // if (!!initialValues) {
+    //   try {
+    //     updateNewCar({ formData: form, id: initialValues?._id });
+    //     return navigate(-1);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // } else {
+    //   try {
+    //     postNewCar(form);
+    //     return navigate(-1);
+    //   } catch (error) {
+    //     console.log(error);
+    //   }
+    // }
   };
   return (
     <Form
@@ -97,6 +121,30 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
             <Input placeholder="Enter a body styles" />
           </Form.Item>
           <Form.Item
+            label="Made Year"
+            name="madeYear"
+            initialValue={
+              initialValues?.madeYear
+                ? moment(initialValues?.madeYear, "YYYY")
+                : ""
+            }
+            {...config}
+          >
+            <DatePicker picker="year" format={"YYYY"} />
+          </Form.Item>
+          <Form.Item
+            label="Price"
+            name="price"
+            rules={[{ required: true, message: "Please, enter a price" }]}
+            initialValue={initialValues?.price ?? ""}
+          >
+            <InputNumber
+              addonBefore={<span>Rs.</span>}
+              min={100000}
+              step={100000}
+            />
+          </Form.Item>{" "}
+          <Form.Item
             label="Range"
             name="range"
             rules={[{ required: true, message: "Please, enter a range" }]}
@@ -119,6 +167,32 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
             />
           </Form.Item>
           <Form.Item
+            label="Ground Clearance"
+            name="groundClearance"
+            rules={[
+              { required: true, message: "Please, enter ground clearance" },
+            ]}
+            initialValue={initialValues?.groundClearance ?? ""}
+          >
+            <InputNumber
+              addonAfter={<span>inch</span>}
+              placeholder="Enter ground clearance"
+            />
+          </Form.Item>{" "}
+          <Form.Item
+            label="Battery Capacity"
+            name="batteryCapacity"
+            rules={[
+              { required: true, message: "Please, enter battery capacity" },
+            ]}
+            initialValue={initialValues?.batteryCapacity ?? ""}
+          >
+            <InputNumber
+              placeholder="Enter battery capacity"
+              addonAfter={<span>kWh</span>}
+            />
+          </Form.Item>
+          <Form.Item
             label="Charging 0 to 100 in"
             name="charging_0_to_100"
             rules={[
@@ -128,7 +202,7 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
           >
             <InputNumber
               placeholder="Enter charging 0 to 100 in"
-              addonAfter={<span>hr</span>}
+              addonAfter={<span>hr </span>}
             />
           </Form.Item>
           <Form.Item
@@ -145,15 +219,18 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
             />
           </Form.Item>
           <Form.Item
-            label="Price"
-            name="price"
-            rules={[{ required: true, message: "Please, enter a price" }]}
-            initialValue={initialValues?.price ?? ""}
+            label="Extra features"
+            name="extraFeatures"
+            rules={[
+              { required: true, message: "Please, enter extra features" },
+            ]}
+            initialValue={initialValues?.extraFeatures ?? []}
           >
-            <InputNumber
-              addonBefore={<span>Rs.</span>}
-              min={100000}
-              step={100000}
+            <Select
+              mode="tags"
+              style={{ width: "100%" }}
+              placeholder="Enter extra features"
+              tokenSeparators={[]}
             />
           </Form.Item>{" "}
           <Form.Item
