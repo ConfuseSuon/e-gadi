@@ -25,9 +25,10 @@ export interface INewCar extends Document {
   seatingCapacity: number;
   price: number;
   imageURL: string[];
+  batteryCapacity: number;
   madeYear: string;
   groundClearance: number;
-  extraFeatures: string[];
+  extraFeatures: string;
   createdBy: string;
   identity: string;
 }
@@ -45,6 +46,10 @@ export interface IUsedCar extends Document {
   sellerName?: string;
   contactNumber?: number;
   socialMedia?: object[];
+  condition: string;
+  modification: boolean;
+  negotiability: boolean;
+  accidentHistory: boolean;
   slug: string;
 }
 

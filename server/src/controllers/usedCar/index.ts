@@ -60,6 +60,10 @@ export const addUsedCar = async (
       address,
       imageURL,
       description,
+      condition,
+      modification,
+      negotiability,
+      accidentHistory,
     } = req.body as Pick<
       IUsedCar,
       | "carBrand"
@@ -70,6 +74,10 @@ export const addUsedCar = async (
       | "address"
       | "imageURL"
       | "description"
+      | "condition"
+      | "modification"
+      | "negotiability"
+      | "accidentHistory"
     >;
 
     const { id: creatorId } = (req as any)?.user;
@@ -86,6 +94,10 @@ export const addUsedCar = async (
       address,
       imageURL,
       description,
+      condition,
+      modification,
+      negotiability,
+      accidentHistory,
       createdBy: creatorId,
       slug: uid(),
     });

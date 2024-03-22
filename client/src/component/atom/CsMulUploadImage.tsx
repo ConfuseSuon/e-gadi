@@ -92,12 +92,12 @@ const CsMulImageUpload = ({
         onChange={onChange}
         onPreview={onPreview}
         beforeUpload={beforeUpload}
-        maxCount={4}
+        maxCount={8}
         onRemove={onRemove}
         accept=".png, .jpg, .webp, .avif"
         multiple={true}
       >
-        {fileList.length < 4 && "+ Upload"}
+        {fileList.length < 8 && "+ Upload"}
       </Upload>
     </>
   );

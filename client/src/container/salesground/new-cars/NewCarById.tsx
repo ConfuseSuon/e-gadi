@@ -11,8 +11,10 @@ import {
   Flex,
   Grid,
   Image,
+  List,
   Row,
   Spin,
+  Tag,
   Tooltip,
   Typography,
 } from "antd";
@@ -21,11 +23,30 @@ import { Fragment, useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import CsDivider from "../../../component/atom/Divider";
 import { useGetSalesgroundNewCarByIdQuery } from "../../../services/salesgroundAPI";
+import { generateRandomColor } from "../../../utils/help";
+
+const colors = [
+  "red",
+  "green",
+  "blue",
+  "yellow",
+  "orange",
+  "purple",
+  "pink",
+  "cyan",
+  "magenta",
+  "teal",
+];
 
 const NewCarById = () => {
   const { id } = useParams();
   const screen = Grid.useBreakpoint();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { data: newCarData, isLoading } = useGetSalesgroundNewCarByIdQuery(
     id as string
   );
@@ -52,7 +73,7 @@ const NewCarById = () => {
               <Flex
                 justify="space-between"
                 wrap="wrap"
-                align="end"
+                align="center"
                 gap={"large"}
               >
                 {/* Information */}
@@ -168,6 +189,30 @@ const NewCarById = () => {
                         {newCarData?.seatingCapacity} adult
                       </Typography.Text>
                     </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                      wrap="wrap"
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Made Year
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                          color: "black",
+                        }}
+                      >
+                        {newCarData?.madeYear}
+                      </Typography.Text>
+                    </Flex>
                     <Flex>
                       <Typography.Text
                         style={{
@@ -251,6 +296,80 @@ const NewCarById = () => {
                         {newCarData?.charging_0_to_100} hr
                       </Typography.Text>
                     </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                      wrap="wrap"
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Battery Capacity
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                        }}
+                      >
+                        {newCarData?.batteryCapacity} kWh
+                      </Typography.Text>
+                    </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                      wrap="wrap"
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Ground Clearance
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                        }}
+                      >
+                        {newCarData?.groundClearance} inch
+                      </Typography.Text>
+                    </Flex>
+                    <Flex>
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "600",
+                          color: "#fc8e3c",
+                          marginTop: ".8rem",
+                        }}
+                      >
+                        Extra Features
+                      </Typography.Text>
+                    </Flex>
+                    <Flex
+                      justify="flex-start"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                      wrap="wrap"
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                          color: "black",
+                        }}
+                      >
+                        {newCarData?.extraFeatures}
+                      </Typography.Text>
+                    </Flex>
                   </Flex>
                 </Flex>
 
@@ -259,7 +378,7 @@ const NewCarById = () => {
                     style={{
                       objectFit: "cover",
                       height: 280,
-                      width: screen?.xs ? 200 : 300,
+                      width: screen?.xs ? 220 : 400,
                       borderRadius: "7px",
                     }}
                     src={newCarData?.imageURL[0]}

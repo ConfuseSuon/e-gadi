@@ -17,6 +17,11 @@ const usedCarSchema: Schema<IUsedCar> = new mongoose.Schema(
     socialMedia: {
       type: [Object],
     },
+    condition: { type: String, required: true },
+    modification: { type: Boolean, required: true },
+    negotiability: { type: Boolean, required: true },
+    accidentHistory: { type: Boolean, required: true },
+
     slug: {
       type: String,
       required: true,

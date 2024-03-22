@@ -61,22 +61,22 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
   const onFinish = (form: any) => {
     form.imageURL = imageUrl.map((image) => image.url);
     form.madeYear = form.madeYear.format("YYYY");
-    console.log(form, "hello");
-    // if (!!initialValues) {
-    //   try {
-    //     updateNewCar({ formData: form, id: initialValues?._id });
-    //     return navigate(-1);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // } else {
-    //   try {
-    //     postNewCar(form);
-    //     return navigate(-1);
-    //   } catch (error) {
-    //     console.log(error);
-    //   }
-    // }
+
+    if (!!initialValues) {
+      try {
+        updateNewCar({ formData: form, id: initialValues?._id });
+        return navigate(-1);
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      try {
+        postNewCar(form);
+        return navigate(-1);
+      } catch (error) {
+        console.log(error);
+      }
+    }
   };
   return (
     <Form
@@ -224,14 +224,9 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
             rules={[
               { required: true, message: "Please, enter extra features" },
             ]}
-            initialValue={initialValues?.extraFeatures ?? []}
+            initialValue={initialValues?.extraFeatures ?? ""}
           >
-            <Select
-              mode="tags"
-              style={{ width: "100%" }}
-              placeholder="Enter extra features"
-              tokenSeparators={[]}
-            />
+            <Input placeholder="Enter extra features" />
           </Form.Item>{" "}
           <Form.Item
             label={
@@ -247,7 +242,7 @@ const NewElectricCarForm: React.FC<any> = ({ initialValues }) => {
             rules={[
               ({}) => ({
                 validator() {
-                  if (!imageUrl) {
+                  if (imageUrl?.length === 0) {
                     return Promise.reject(
                       "Please upload an image file or provide an image URL!"
                     );

@@ -60,6 +60,7 @@ export const addNewCar = async (
       range,
       imageURL,
       description,
+      batteryCapacity,
       madeYear,
       groundClearance,
       extraFeatures,
@@ -75,6 +76,7 @@ export const addNewCar = async (
       | "seatingCapacity"
       | "price"
       | "imageURL"
+      | "batteryCapacity"
       | "madeYear"
       | "groundClearance"
       | "extraFeatures"
@@ -96,6 +98,7 @@ export const addNewCar = async (
       range,
       imageURL,
       description,
+      batteryCapacity,
       madeYear,
       groundClearance,
       extraFeatures,

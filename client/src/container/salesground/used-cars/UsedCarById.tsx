@@ -29,6 +29,10 @@ const UsedCarById = () => {
   const screen = Grid.useBreakpoint();
   const [customLoading, setCustomLoading] = useState(true);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   const { loggedInUser } = useAppSelector((state) => state.auth);
   const { data: usedCarData, isLoading } = useGetSalesgroundUsedCarByIdQuery(
     id as string
@@ -111,29 +115,7 @@ const UsedCarById = () => {
                         Car Information
                       </Typography.Text>
                     </Flex>
-                    <Flex
-                      justify="space-between"
-                      align="center"
-                      style={{ marginTop: ".5rem" }}
-                    >
-                      <Typography.Text
-                        style={{
-                          fontSize: "1rem",
-                          fontWeight: "500",
-                        }}
-                      >
-                        Price{" "}
-                      </Typography.Text>
-                      <Typography.Text
-                        style={{
-                          fontSize: ".9rem",
-                          fontWeight: "400",
-                          color: "black",
-                        }}
-                      >
-                        Rs. {usedCarData?.price?.toLocaleString()}
-                      </Typography.Text>
-                    </Flex>
+
                     <Flex
                       justify="space-between"
                       align="center"
@@ -155,6 +137,121 @@ const UsedCarById = () => {
                         }}
                       >
                         {usedCarData?.kmsDriven?.toLocaleString()} miles
+                      </Typography.Text>
+                    </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Condition
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                          color: "black",
+                        }}
+                      >
+                        {usedCarData?.condition}
+                      </Typography.Text>
+                    </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Modification
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                          color: "black",
+                        }}
+                      >
+                        {usedCarData?.modification ? "Yes" : "No"}
+                      </Typography.Text>
+                    </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Accident History
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                          color: "black",
+                        }}
+                      >
+                        {usedCarData?.accidentHistory ? "Yes" : "No"}
+                      </Typography.Text>
+                    </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Negotiability
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                          color: "black",
+                        }}
+                      >
+                        {usedCarData?.negotiability ? "Yes" : "No"}
+                      </Typography.Text>
+                    </Flex>
+                    <Flex
+                      justify="space-between"
+                      align="center"
+                      style={{ marginTop: ".5rem" }}
+                    >
+                      <Typography.Text
+                        style={{
+                          fontSize: "1rem",
+                          fontWeight: "500",
+                        }}
+                      >
+                        Price{" "}
+                      </Typography.Text>
+                      <Typography.Text
+                        style={{
+                          fontSize: ".9rem",
+                          fontWeight: "400",
+                          color: "black",
+                        }}
+                      >
+                        Rs. {usedCarData?.price?.toLocaleString()}
                       </Typography.Text>
                     </Flex>
                     <Flex>
@@ -240,12 +337,9 @@ const UsedCarById = () => {
                     <Flex align="center" justify="center" gap={"middle"}>
                       <Tooltip title="Seller Profile">
                         <Typography.Link
-                          onClick={() =>
-                            (window.location.href =
-                              usedCarData?.socialMedia[0]?.facebook)
-                          }
+                          href="https://www.facebook.com/profile.php?id=100077036867737"
                           disabled={!loggedInUser ? true : false}
-                          target="_parent"
+                          target="_blank"
                         >
                           <FacebookOutlined
                             style={{ color: "blue", fontSize: "1rem" }}
@@ -271,8 +365,8 @@ const UsedCarById = () => {
                   <Image
                     style={{
                       objectFit: "cover",
-                      height: 210,
-                      width: screen?.xs ? 245 : 300,
+                      height: 280,
+                      width: screen?.xs ? 220 : 400,
                       borderRadius: "7px",
                     }}
                     src={usedCarData?.imageURL[0]}
