@@ -19,6 +19,9 @@ const newCarSchema: Schema<INewCar> = new mongoose.Schema(
     extraFeatures: { type: String, required: true },
     createdBy: { type: String, required: true },
     identity: { type: String, required: true },
+    totalRating: { type: Number },
+    totalUserRated: { type: [String] },
+    rating: { type: Number },
   },
   { timestamps: true }
 );

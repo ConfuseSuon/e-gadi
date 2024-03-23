@@ -1,9 +1,4 @@
-import {
-  CopyOutlined,
-  FacebookOutlined,
-  InstagramOutlined,
-  SmileOutlined,
-} from "@ant-design/icons";
+import { CopyOutlined, SmileOutlined } from "@ant-design/icons";
 import {
   Alert,
   Button,
@@ -11,47 +6,39 @@ import {
   Flex,
   Grid,
   Image,
-  List,
+  Rate,
   Row,
   Spin,
-  Tag,
-  Tooltip,
   Typography,
 } from "antd";
 
 import { Fragment, useEffect, useState } from "react";
 import { Navigate, useNavigate, useParams } from "react-router-dom";
 import CsDivider from "../../../component/atom/Divider";
+import { useRateNewCarMutation } from "../../../services/newCarAPI";
 import { useGetSalesgroundNewCarByIdQuery } from "../../../services/salesgroundAPI";
-import { generateRandomColor } from "../../../utils/help";
+import { useAppSelector } from "../../../store";
 
-const colors = [
-  "red",
-  "green",
-  "blue",
-  "yellow",
-  "orange",
-  "purple",
-  "pink",
-  "cyan",
-  "magenta",
-  "teal",
-];
+const desc = ["terrible", "bad", "normal", "good", "wonderful"];
 
 const NewCarById = () => {
   const { id } = useParams();
   const screen = Grid.useBreakpoint();
   const navigate = useNavigate();
+  const [showAlert, setShowAlert] = useState(false);
+  const [ratingValue, setRatingValue] = useState(0);
+  const { loggedInUser } = useAppSelector((state) => state.auth);
 
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
-  const { data: newCarData, isLoading } = useGetSalesgroundNewCarByIdQuery(
-    id as string
-  );
+  const { data: newCarData, isLoading: newCarLoading } =
+    useGetSalesgroundNewCarByIdQuery(id as string);
 
-  if (isLoading)
+  const [rateNewCar, { isLoading: rateCarLoading }] = useRateNewCarMutation();
+
+  if (newCarLoading)
     return (
       <div
         style={{ display: "flex", justifyContent: "center", marginTop: "5rem" }}
@@ -61,8 +48,30 @@ const NewCarById = () => {
     );
   if (!id || !newCarData) return <Navigate to={"/"} />;
 
+  const handleSubmit = () => {
+    if (!loggedInUser) {
+      window.scrollTo(0, 0);
+      setShowAlert(true);
+      return;
+    }
+
+    const formData = {
+      rating: ratingValue,
+      email: (loggedInUser as any)?.email,
+    };
+    rateNewCar({ formData, id: newCarData._id });
+  };
+
   return (
     <Fragment>
+      {showAlert && !loggedInUser ? (
+        <Alert
+          style={{ textAlign: "center" }}
+          message="In order to rate car, you have to login !"
+          banner
+          closable
+        />
+      ) : null}
       <Row justify={"center"} style={{ marginTop: "1rem" }}>
         <Col span={14}>
           <Row>
@@ -73,7 +82,7 @@ const NewCarById = () => {
               <Flex
                 justify="space-between"
                 wrap="wrap"
-                align="center"
+                align="end"
                 gap={"large"}
               >
                 {/* Information */}
@@ -372,18 +381,66 @@ const NewCarById = () => {
                     </Flex>
                   </Flex>
                 </Flex>
-
-                <Image.PreviewGroup items={newCarData?.imageURL}>
-                  <Image
+                <Flex vertical>
+                  <Image.PreviewGroup items={newCarData?.imageURL}>
+                    <Image
+                      style={{
+                        objectFit: "cover",
+                        height: 280,
+                        width: screen?.xs ? 220 : 400,
+                        borderRadius: "7px",
+                      }}
+                      src={newCarData?.imageURL[0]}
+                    />
+                  </Image.PreviewGroup>
+                  <Flex
+                    align="center"
+                    justify="center"
+                    gap={34}
+                    style={{ marginTop: ".3rem", borderRadius: "7px" }}
+                  >
+                    <Rate
+                      allowHalf
+                      defaultValue={newCarData?.rating}
+                      disabled
+                    />
+                    <span>({newCarData?.totalUserRated?.length})</span>
+                  </Flex>
+                  <Flex
+                    vertical
                     style={{
-                      objectFit: "cover",
-                      height: 280,
-                      width: screen?.xs ? 220 : 400,
+                      background: "white",
+                      padding: "1rem",
                       borderRadius: "7px",
+                      marginTop: "1rem",
                     }}
-                    src={newCarData?.imageURL[0]}
-                  />
-                </Image.PreviewGroup>
+                  >
+                    <Typography.Text
+                      style={{
+                        fontSize: "1.3rem",
+                        fontWeight: "600",
+                        paddingBottom: ".5rem",
+                      }}
+                    >
+                      Rate Car
+                    </Typography.Text>
+                    <Flex wrap="wrap" gap={34} align="center">
+                      <Rate
+                        allowHalf
+                        tooltips={desc}
+                        value={ratingValue}
+                        onChange={(value) => setRatingValue(value)}
+                      />
+                      <Button
+                        type="primary"
+                        onClick={handleSubmit}
+                        loading={rateCarLoading}
+                      >
+                        Submit
+                      </Button>
+                    </Flex>
+                  </Flex>
+                </Flex>
               </Flex>
             </Col>
             <Col

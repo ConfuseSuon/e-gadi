@@ -31,6 +31,9 @@ export interface INewCar extends Document {
   extraFeatures: string;
   createdBy: string;
   identity: string;
+  totalRating: number;
+  totalUserRated: string[];
+  rating: number;
 }
 
 export interface IUsedCar extends Document {

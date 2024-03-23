@@ -32,7 +32,7 @@ export const salesgroundAPI = apiSlice.injectEndpoints({
       transformErrorResponse(baseQueryReturnValue: any) {
         return baseQueryReturnValue?.data;
       },
-      providesTags: ["UsedCars"],
+      providesTags: ["NewCars"],
     }),
     getSalesgroundNewCarById: builder.query<any, string>({
       query: (id) => `/salesground/new-car/get-by-id/${id}`,
@@ -42,7 +42,7 @@ export const salesgroundAPI = apiSlice.injectEndpoints({
       transformErrorResponse(baseQueryReturnValue: any) {
         return baseQueryReturnValue?.data;
       },
-      providesTags: ["UsedCars"],
+      providesTags: ["NewCars"],
     }),
   }),
 });

@@ -1,4 +1,4 @@
-import { Col, Flex, Grid, Row } from "antd";
+import { Col, Flex, Grid, Row, Typography } from "antd";
 
 import { Fragment } from "react";
 
@@ -35,16 +35,59 @@ const NewCars = () => {
     <Fragment>
       {/* Seciton 1 */}
       <Row justify={"center"}>
-        <Col span={24} style={{ background: "black" }}>
-          <img
-            src={firstCarousel}
+        <Col span={24} style={{ position: "relative" }}>
+          <Row
+            justify={"center"}
             style={{
-              width: "100%",
+              marginTop: "2rem",
               height: "20rem",
-              objectFit: "cover",
-              opacity: ".9",
+              width: "100%",
+              position: "absolute",
+              zIndex: "10",
             }}
-          />
+          >
+            <Col
+              span={10}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <Typography.Title
+                style={{
+                  color: "#fefbf7",
+                  letterSpacing: ".1rem",
+                  textAlign: "center",
+                }}
+                level={screen?.xs ? 2 : 1}
+              >
+                New Cars
+              </Typography.Title>
+              <Typography.Paragraph
+                style={{
+                  color: "#fefbf7",
+                  letterSpacing: ".1rem",
+                  textAlign: "center",
+                }}
+              >
+                Find your dream new car with us. Explore models to fit your
+                family's needs and budget, with the latest features and
+                reliability.
+              </Typography.Paragraph>
+            </Col>
+          </Row>
+          <Col span={24} style={{ background: "black" }}>
+            <img
+              src={firstCarousel}
+              style={{
+                width: "100%",
+                height: "20rem",
+                objectFit: "cover",
+                opacity: ".6",
+              }}
+            />
+          </Col>
         </Col>
       </Row>
 
@@ -64,7 +107,12 @@ const NewCars = () => {
             >
               {data?.map((car: any) => {
                 return (
-                  <div style={{ padding: "2rem" }} key={car?._id}>
+                  <div
+                    style={{
+                      padding: "2rem 2rem 4rem 2rem",
+                    }}
+                    key={car?._id}
+                  >
                     <CsCarCard
                       imageURL={car?.imageURL[0]}
                       title={`${car?.carBrand} ${car?.carModel}`}

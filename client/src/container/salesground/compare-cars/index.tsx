@@ -1,9 +1,9 @@
 import {
   Card,
   Col,
-  Divider,
   Empty,
   Flex,
+  Grid,
   Image,
   Row,
   Select,
@@ -21,6 +21,7 @@ import {
 } from "../../../services/compareCarAPI";
 
 const CompareCars = () => {
+  const screen = Grid.useBreakpoint();
   const [firstCar, setFirstCar] = useState("");
   const [secondCar, setSecondCar] = useState("");
   const { data: compareCarList } = useGetCompareCarListQuery();
@@ -79,6 +80,7 @@ const CompareCars = () => {
                   letterSpacing: ".1rem",
                   textAlign: "center",
                 }}
+                level={screen?.xs ? 2 : 1}
               >
                 Compare Cars
               </Typography.Title>
@@ -479,6 +481,60 @@ const CompareCars = () => {
                 </Col>
               </Row>
 
+              <Row
+                align={"middle"}
+                style={{
+                  background: "#ececec",
+
+                  marginTop: ".1rem",
+                  padding: ".7rem 1rem",
+                  borderRadius: "6px",
+                }}
+              >
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "600" }}
+                  >
+                    Made Year
+                  </Typography.Text>
+                </Col>
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {firstCardData[0]?.madeYear}
+                  </Typography.Text>
+                </Col>{" "}
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {secondCardData[0]?.madeYear}
+                  </Typography.Text>
+                </Col>
+              </Row>
+
               {/* Features */}
               <Row
                 align={"middle"}
@@ -665,6 +721,112 @@ const CompareCars = () => {
                 </Col>
               </Row>
 
+              <Row
+                align={"middle"}
+                style={{
+                  background: "#ececec",
+                  marginTop: ".1rem",
+                  padding: ".7rem 1rem",
+                  borderRadius: "6px",
+                }}
+              >
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "600" }}
+                  >
+                    Battery Capacity
+                  </Typography.Text>
+                </Col>
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {firstCardData[0]?.batteryCapacity} kWh
+                  </Typography.Text>
+                </Col>{" "}
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {secondCardData[0]?.batteryCapacity} kWh
+                  </Typography.Text>
+                </Col>
+              </Row>
+
+              <Row
+                align={"middle"}
+                style={{
+                  background: "white",
+                  marginTop: ".1rem",
+                  padding: ".7rem 1rem",
+                  borderRadius: "6px",
+                }}
+              >
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-start",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "600" }}
+                  >
+                    Ground Clearance
+                  </Typography.Text>
+                </Col>
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {firstCardData[0]?.groundClearance} inch
+                  </Typography.Text>
+                </Col>{" "}
+                <Col
+                  span={8}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "flex-end",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {secondCardData[0]?.groundClearance} inch
+                  </Typography.Text>
+                </Col>
+              </Row>
+
               {/* Description */}
               <Row
                 align={"middle"}
@@ -766,6 +928,76 @@ const CompareCars = () => {
                     {secondCardData[0]?.description}
                   </Typography.Text>
                 </Col>
+              </Row>
+
+              {/* Features */}
+              <Row
+                align={"middle"}
+                style={{
+                  background: "#ff8e3c",
+                  marginTop: ".1rem",
+                  padding: ".7rem 1rem",
+                  borderRadius: "6px",
+                }}
+              >
+                <Col
+                  span={24}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography.Text
+                    style={{
+                      color: "white",
+                      fontSize: ".9rem",
+                      fontWeight: "600",
+                    }}
+                  >
+                    Extra Features
+                  </Typography.Text>
+                </Col>
+              </Row>
+
+              <Row
+                align={"middle"}
+                style={{
+                  background: "white",
+                  marginTop: ".1rem",
+                  padding: ".7rem 1rem",
+                  borderRadius: "6px",
+                }}
+                gutter={[15, 0]}
+              >
+                <Col
+                  span={12}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {secondCardData[0]?.extraFeatures}
+                  </Typography.Text>
+                </Col>{" "}
+                <Col
+                  span={12}
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <Typography.Text
+                    style={{ fontSize: ".9rem", fontWeight: "500" }}
+                  >
+                    {secondCardData[0]?.extraFeatures}
+                  </Typography.Text>
+                </Col>{" "}
               </Row>
             </Fragment>
           ) : (

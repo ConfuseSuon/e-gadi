@@ -25,6 +25,12 @@ const carouselItem = [
   { id: 2, image: secondCarousel },
 ];
 
+// Filter `option.label` match the user type `input`
+const filterOption = (
+  input: string,
+  option?: { label: string; value: string }
+) => (option?.label ?? "").toLowerCase().includes(input.toLowerCase());
+
 const Home: React.FC = () => {
   const screen = Grid.useBreakpoint();
   const { data: newCarsList } = useGetSalesgroundNewCarsQuery();
@@ -69,17 +75,18 @@ const Home: React.FC = () => {
                     wrap="wrap"
                   >
                     <Select
+                      showSearch
+                      optionFilterProp="children"
+                      filterOption={filterOption}
                       size="large"
                       style={{ width: "70%" }}
-                      showSearch
                       placeholder="Model"
-                      optionFilterProp="children"
                       value={selectdCar}
                       onChange={(value) => setSelectedCar(value)}
                       options={
                         newCarsList
                           ? newCarsList?.map((car: any) => ({
-                              value: `${car?.carBrand} ${car?.carModel}`,
+                              value: `${car?._id}`,
                               label: `${car?.carBrand} ${car?.carModel}`,
                             }))
                           : []

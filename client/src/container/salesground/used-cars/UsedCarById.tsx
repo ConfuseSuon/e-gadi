@@ -1,5 +1,7 @@
 import {
+  CommentOutlined,
   CopyOutlined,
+  CustomerServiceOutlined,
   FacebookOutlined,
   InstagramOutlined,
   SmileOutlined,
@@ -9,6 +11,7 @@ import {
   Button,
   Col,
   Flex,
+  FloatButton,
   Grid,
   Image,
   Row,
@@ -56,7 +59,8 @@ const UsedCarById = () => {
     <Fragment>
       {!loggedInUser ? (
         <Alert
-          message="In order to view compelete contact details, you have to login!"
+          style={{ textAlign: "center" }}
+          message="In order to view compelete contact details and chat with seller on social media handle, you have to login !"
           banner
           closable
         />
@@ -334,7 +338,7 @@ const UsedCarById = () => {
                         {loggedInUser ? usedCarData?.contactNumber : "?"}
                       </Typography.Text>
                     </Flex>
-                    <Flex align="center" justify="center" gap={"middle"}>
+                    {/* <Flex align="center" justify="center" gap={"middle"}>
                       <Tooltip title="Seller Profile">
                         <Typography.Link
                           href="https://www.facebook.com/profile.php?id=100077036867737"
@@ -357,7 +361,7 @@ const UsedCarById = () => {
                           />
                         </Typography.Link>
                       </Tooltip>
-                    </Flex>
+                    </Flex> */}
                   </Flex>
                 </Flex>
 
@@ -387,6 +391,27 @@ const UsedCarById = () => {
           </Row>
         </Col>
       </Row>
+
+      <FloatButton.Group
+        trigger="hover"
+        type="primary"
+        style={{ right: 24 }}
+        icon={<CommentOutlined />}
+        tooltip={"Chat with seller"}
+      >
+        <FloatButton
+          icon={<FacebookOutlined style={{ color: "#316FF6" }} />}
+          href={`${loggedInUser ? usedCarData?.socialMedia[0]?.facebook : ""}`}
+          target="_blank"
+          tooltip={`${loggedInUser ? "" : "Login to chat"}`}
+        />
+        <FloatButton
+          icon={<InstagramOutlined style={{ color: "#FF3B30" }} />}
+          href={`${loggedInUser ? usedCarData?.socialMedia[0]?.instagram : ""}`}
+          target="_blank"
+          tooltip={`${loggedInUser ? "" : "Login to chat"}`}
+        />
+      </FloatButton.Group>
     </Fragment>
   );
 };
