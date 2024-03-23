@@ -399,11 +399,7 @@ const NewCarById = () => {
                     gap={34}
                     style={{ marginTop: ".3rem", borderRadius: "7px" }}
                   >
-                    <Rate
-                      allowHalf
-                      defaultValue={newCarData?.rating}
-                      disabled
-                    />
+                    <Rate allowHalf value={newCarData?.rating} disabled />
                     <span>({newCarData?.totalUserRated?.length})</span>
                   </Flex>
                   <Flex

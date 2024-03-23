@@ -73,6 +73,7 @@ export const newCarAPI = apiSlice.injectEndpoints({
         body: formData,
       }),
       transformResponse: (resp: any) => {
+        showMessage("success", resp?.message);
         return resp;
       },
       transformErrorResponse(baseQueryReturnValue: any) {

@@ -185,7 +185,7 @@ export const rateNewCar = async (
     const { rating: userRating, email } = req.body;
 
     if (!userRating || !email)
-      return res.status(400).json({ message: "Provide all field", data: {} });
+      return res.status(400).json({ message: "Select rating value", data: {} });
 
     const newCarData: INewCar | null = await NewCar.findById(id);
     if (!newCarData)
@@ -212,7 +212,7 @@ export const rateNewCar = async (
       return res.status(404).json({ message: "Car not found", data: {} });
 
     return res.status(200).json({
-      message: "Succesfully, rated",
+      message: "Thank you for rating car !",
       data: updatedNewCar,
     });
   } catch (error) {
