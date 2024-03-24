@@ -32,29 +32,35 @@ export const authMiddleware = (
     try {
       (async () => {
         // google auth token verifying
-        const ticket: any = await client.verifyIdToken({
-          idToken: gToken as string,
-          audience:
-            "886062611278-j96irk5c6udfurhdf656svr969me1l3d.apps.googleusercontent.com",
-        });
-        const { email, picture, name } = ticket.getPayload();
+        await client
+          .verifyIdToken({
+            idToken: gToken as string,
+            audience:
+              "886062611278-j96irk5c6udfurhdf656svr969me1l3d.apps.googleusercontent.com",
+          })
+          .then(async (resp: any) => {
+            const { email, picture, name } = resp.getPayload();
 
-        // getting user
-        const existingUser: Pick<IUser, "_id" | "full_name"> | null =
-          await User.findOne({ email });
+            // getting user
+            const existingUser: Pick<IUser, "_id" | "full_name"> | null =
+              await User.findOne({ email });
 
-        if (!existingUser)
-          return res
-            .status(401)
-            .json({ message: "User not found via google login" });
+            if (!existingUser)
+              return res
+                .status(401)
+                .json({ message: "User not found via google login" });
 
-        const userData = {
-          id: existingUser?._id,
-          full_name: existingUser?.full_name,
-        };
+            const userData = {
+              id: existingUser?._id,
+              full_name: existingUser?.full_name,
+            };
 
-        (req as any).user = userData;
-        next();
+            (req as any).user = userData;
+            next();
+          })
+          .catch((err) =>
+            res.status(401).json({ message: "Google Auth Failed" })
+          );
       })();
     } catch (error) {
       return res.status(401).json({ message: "Google Auth Failed!" });
